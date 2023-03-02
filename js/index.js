@@ -15,13 +15,13 @@ const showMore = () =>{
 }
 
 const displayData = (tools) =>{
-    
+    // console.log(tool)
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
 
     tools.forEach(tool =>{
-        // console.log(tool)
+        // console.log(tool.id)
      
 
         const colDiv = document.createElement('div');
@@ -52,9 +52,9 @@ const displayData = (tools) =>{
          <div class="d-flex justify-content-between">
         <div>
         <h4>${tool.name}</h4>           
-        <p>${tool.published_in}</p>
+        <p><i class="fa-solid fa-calendar-days"></i> ${tool.published_in}</p>
         </div>
-           <button class="btn"> <i class="fa-solid fa-arrow-right text-primary fs-2" onclick="loadDetails('${tool.id}')"></i></button>
+           <button onclick="loadDetails('${tool.id}')" class="btn" data-bs-toggle="modal" data-bs-target="#detailsModal"> <i class="fa-solid fa-arrow-right text-primary fs-2"></i></button>
          </div>
         
          
@@ -71,20 +71,57 @@ const displayData = (tools) =>{
 
 
 const loadDetails = (id) =>{
-  const URL =`https://openapi.programming-hero.com/api/ai/tool/${id}`
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+  fetch(url)
+  .then(res=> res.json())
+  .then(details => displayDetails(details.data))
+}
 
-  console.log(URL)
-  fetch(URL)
-  .then(res => res.json())
-  .then(data => displayDetails(data.data))
+const displayDetails = (details)=>{
+    console.log(details.input_output_examples[0].input)
+
+   const modalTitle = document.getElementById('detailsModalLabel')
+   modalTitle.innerText = details.description;
+
+   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us for pricing'  ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
+   document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us for pricing' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
+   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us for pricing' ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
+
+   document.getElementById('list-1').innerText = details.features[1].feature_name;
+   document.getElementById('list-2').innerText = details.features[2].feature_name;
+   document.getElementById('list-3').innerText = details.features[3].feature_name;
+
+   document.getElementById('second-list-1').innerText = details.integrations[0];
+   document.getElementById('second-list-2').innerText = details.integrations[1];
+   document.getElementById('second-list-3').innerText = details.integrations[2];
+
+   const secondPart = document.getElementById('second-card');
+   secondPart.innerHTML = "";
+
+   const image = document.createElement('img');
+   image.src = details.image_link[0];
+   image.classList.add('img-fluid');
+
+   secondPart.appendChild(image);
+
+   document.getElementById('second-title').innerText = details.input_output_examples[0].input;
+
+
+  
+
+   
+
+  
+   
+   
+
+   
+
 }
 
 
-const displayDetails = (details) =>{
-  console.log(details)
-
-}
 
 
 
+loadDetails()
 loadData();

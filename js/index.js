@@ -78,7 +78,7 @@ const loadDetails = (id) =>{
 }
 
 const displayDetails = (details)=>{
-    console.log(details.input_output_examples[0].input)
+    console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
@@ -100,11 +100,26 @@ const displayDetails = (details)=>{
 
    const image = document.createElement('img');
    image.src = details.image_link[0];
-   image.classList.add('img-fluid');
+   image.classList.add('img-fluid', 'mb-5');
+
+   const h3 = document.createElement('h3');
+   h3.innerHTML = details.input_output_examples[0].input;
+
+   const p = document.createElement('p');
+   p.innerHTML = details.input_output_examples[0].output;
+
+   secondPart.innerHTML = `
+   <span class="position-absolute top-0 end-0 translate-middle badge bg-danger px-3 py-2">
+    ${details.accuracy.score * 100}
+    
+  </span>
+   `
 
    secondPart.appendChild(image);
+   secondPart.appendChild(h3);
+   secondPart.appendChild(p);
 
-   document.getElementById('second-title').innerText = details.input_output_examples[0].input;
+   
 
 
   

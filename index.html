@@ -28,17 +28,23 @@
 
     <!----------------------------- main section starts here ------------------ -->
 
+    <section class=" d-flex justify-content-center">
+        <div id="spinner" class="spinner-border my-5 d-none" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </section>
+
     <section>
         <!---------------------- cards  ---------------------->
 
-        <div id="card-container" class="row row-cols-1 row-cols-md-3 g-4">
+        <div id="card-container" class="row row-cols-1 row-cols-md-3 g-4 mb-5">
             
            
            
           </div>
 
           <div class="text-center my-5">
-            <button class="btn btn-danger px-5 py-3 fs-5 fw-bold" onclick="showMore()">Show More</button>
+            <button id="show-more" class="btn btn-danger px-5 py-3 fs-5 fw-bold" onclick="showMore()">Show More</button>
           </div>
     </section>
 

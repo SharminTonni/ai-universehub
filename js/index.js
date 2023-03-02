@@ -1,8 +1,12 @@
 const loadData = () =>{
+  document.getElementById('spinner').classList.remove('d-none');
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
     .then(res => res.json())
-    .then(data => displayData(data.data.tools.slice(0, 6)))
+    .then(data => {
+      document.getElementById('spinner').classList.add('d-none');
+      displayData(data.data.tools.slice(0, 6))
+    })
 }
 
 const showMore = () =>{
@@ -64,8 +68,6 @@ const displayData = (tools) =>{
         `;
     
         cardContainer.appendChild(colDiv);
-
-
     })
 }
 
@@ -87,13 +89,13 @@ const displayDetails = (details)=>{
    document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us for pricing' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
    document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us for pricing' ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
 
-   document.getElementById('list-1').innerText = details.features[1].feature_name;
-   document.getElementById('list-2').innerText = details.features[2].feature_name;
-   document.getElementById('list-3').innerText = details.features[3].feature_name;
+   document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
+   document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
+   document.getElementById('list-3').innerText = details.features[3].feature_name ? details.features[3].feature_name : 'No Data Found';
 
-   document.getElementById('second-list-1').innerText = details.integrations[0];
-   document.getElementById('second-list-2').innerText = details.integrations[1];
-   document.getElementById('second-list-3').innerText = details.integrations[2];
+   document.getElementById('second-list-1').innerText = details.integrations ? details.integrations[0] : 'No Data Found';
+   document.getElementById('second-list-2').innerText = details.integrations ? details.integrations[1] : 'No Data Found';
+   document.getElementById('second-list-3').innerText = details.integrations ? details.integrations[2] : 'No Data Found';
 
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";
@@ -119,22 +121,11 @@ const displayDetails = (details)=>{
    secondPart.appendChild(h3);
    secondPart.appendChild(p);
 
-   
-
-
-  
-
-   
-
-  
-   
-   
-
-   
-
 }
 
-
+document.getElementById('show-more').addEventListener('click', function(e){
+    e.target.style.display = 'none';
+})
 
 
 

@@ -104,23 +104,27 @@ const displayDetails = (details)=>{
 
    const pricingDiv = document.getElementById('pricing')
    pricingDiv.innerHTML = "";
-   pricingDiv.classList.add('d-flex','my-3', 'gap-3')
-   details.pricing.forEach(price =>{
-    console.log(price.price)
+   pricingDiv.classList.add('d-flex','my-3', 'gap-3', 'justify-content-center');
+
+   if(details.pricing != null){
+      details.pricing.forEach(price =>{
+        
     
     const h5 = document.createElement('h5');
-    if(price !== null){
+   
       
         h5.innerText = price.price + " " + price.plan;
         
         pricingDiv.appendChild(h5);
-      }
+      })}
       else{
-        h5.innerText = 'Free Of Cost';
-        pricingDiv.appendChild(h5)
+        const h4 = document.createElement('h4')
+        h4.innerText = "Free Of Cost";
+        
+        pricingDiv.appendChild(h4);
       }
     
-   })
+   
    
 
  

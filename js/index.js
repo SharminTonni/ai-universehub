@@ -102,9 +102,28 @@ const displayDetails = (details)=>{
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
 
-   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us ' ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
-   document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us ' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
-   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us '  ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
+   const pricingDiv = document.getElementById('pricing')
+   pricingDiv.innerHTML = "";
+   pricingDiv.classList.add('d-flex','my-3', 'gap-3')
+   details.pricing.forEach(price =>{
+    console.log(price.price)
+    
+    const h5 = document.createElement('h5');
+    if(price !== null){
+      
+        h5.innerText = price.price + " " + price.plan;
+        
+        pricingDiv.appendChild(h5);
+      }
+      else{
+        h5.innerText = 'Free Of Cost';
+        pricingDiv.appendChild(h5)
+      }
+    
+   })
+   
+
+ 
 
    document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
    document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
@@ -114,11 +133,17 @@ const displayDetails = (details)=>{
   const secondList = document.getElementById("integration");
   secondList.innerHTML = "";
 
-  details.integrations.forEach((integration) => {
-    const li = document.createElement("li");
-    li.innerHTML = integration
-    secondList.appendChild(li);
-  })
+  if(details.integrations !== null){
+    details.integrations.forEach((integration) => {
+      const li = document.createElement("li");
+      li.innerHTML = integration
+      secondList.appendChild(li);
+    })
+  }
+  else{
+    li.innerText = 'No Data Found'
+  }
+
 
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";

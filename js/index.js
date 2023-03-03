@@ -110,7 +110,7 @@ const displayDetails = (details)=>{
       details.pricing.forEach(price =>{
         
     
-    const h5 = document.createElement('h5');
+         const h5 = document.createElement('h5');
    
       
         h5.innerText = price.price + " " + price.plan;
@@ -145,7 +145,9 @@ const displayDetails = (details)=>{
     })
   }
   else{
+    const li = document.createElement("li");
     li.innerText = 'No Data Found'
+    secondList.appendChild(li)
   }
 
 

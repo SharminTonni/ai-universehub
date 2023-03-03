@@ -116,10 +116,10 @@ const displayDetails = (details)=>{
    }
 
    const h3 = document.createElement('h3');
-   h3.innerHTML = details.input_output_examples[0].input;
+   h3.innerHTML = details.input_output_examples[0] ? details.input_output_examples[0].input : details.input_output_examples[1].input;
 
    const p = document.createElement('p');
-   p.innerHTML = details.input_output_examples[0].output;
+   p.innerHTML = details.input_output_examples[0] ? details.input_output_examples[0].output : details.input_output_examples[1].output;
 
   
    secondPart.appendChild(span)

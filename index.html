@@ -33,13 +33,19 @@
     </style>
 </head>
 <body class="container">
+
+  <!----------------------------------- header part here -------------------------- -->
     
     <header class="text-center my-5">
         <h1 class="mb-4">AI Universe Hub</h1>
         <button onclick="sortBy()" class="btn btn-danger px-5 py-3 fs-5 fw-bold">Sort By Date</button>
     </header>
 
+
+
     <!----------------------------- main section starts here ------------------ -->
+
+    <main>
 
     <section class=" d-flex justify-content-center">
         <div id="spinner" class="spinner-border my-5 d-none" role="status">
@@ -47,12 +53,13 @@
           </div>
     </section>
 
-    <section>
-        <!---------------------- cards  ---------------------->
 
-        <div id="card-container" class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-            
-           
+
+    <!---------------------- cards  ---------------------->
+
+    <section>
+
+        <div id="card-container" class="row row-cols-1 row-cols-md-3 g-4 mb-5">           
            
           </div>
 
@@ -62,16 +69,12 @@
     </section>
 
 
+    <!-- -------------------------------modal here ----------------------- -->
     <section>
-
-        <!-- -------------------------------modal here ----------------------- -->
-
-    
-
   
   <!---------------------------- Modal---------------------------- -->
 
-<br>
+
   <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -130,7 +133,7 @@
 
 
 
-
+  </main>
 
 
 

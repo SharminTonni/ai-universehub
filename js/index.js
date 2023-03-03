@@ -1,6 +1,9 @@
-
+// 1.storing the data into a variable for later accessing for sorting 
 
 let sortData = [];
+
+
+// 2.loading data from api 
 
 const loadData = () =>{
   document.getElementById('spinner').classList.remove('d-none');
@@ -16,7 +19,7 @@ const loadData = () =>{
 }
 
 
-
+// 3.loading data for onclick on show more button 
 const showMore = () =>{
 
   const url = `https://openapi.programming-hero.com/api/ai/tools`
@@ -26,11 +29,11 @@ const showMore = () =>{
 
 }
 
-
+// 4.displaying data on browser 
 
 const displayData = (tools) =>{
   
-    console.log(tools)
+    // console.log(tools)
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
@@ -39,6 +42,7 @@ const displayData = (tools) =>{
         // console.log(tool)
      
 
+        // 5.creating cards to show data on web browser
         const colDiv = document.createElement('div');
         colDiv.classList.add('col');
       
@@ -86,6 +90,7 @@ const displayData = (tools) =>{
 }
 
 
+// 6.loading data for unique id's from api
 const loadDetails = (id) =>{
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
   fetch(url)
@@ -96,11 +101,16 @@ const loadDetails = (id) =>{
   })
 }
 
+
+// 7. showing detail data on a modal on an onclick arrow button
+
 const displayDetails = (details)=>{
-    console.log(details)
+    // console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
+
+  //  8.pricing is here 
 
    const pricingDiv = document.getElementById('pricing')
    pricingDiv.innerHTML = "";
@@ -124,10 +134,8 @@ const displayDetails = (details)=>{
         pricingDiv.appendChild(h4);
       }
     
-   
-   
 
- 
+      // 9. feature_name here 
 
    document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
    document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
@@ -151,6 +159,8 @@ const displayDetails = (details)=>{
   }
 
 
+  // 10.integration part is here
+
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";
 
@@ -167,6 +177,7 @@ const displayDetails = (details)=>{
     span.innerHTML = (details.accuracy.score * 100) + '%' + 'Accuracy'  
    }
 
+  //  12.input output examples
    const h3 = document.createElement('h3');
    h3.innerHTML = details.input_output_examples[0] ? details.input_output_examples[0].input : details.input_output_examples[1].input;
 
@@ -181,9 +192,14 @@ const displayDetails = (details)=>{
 
 }
 
+// 13.show more button is hidden after clicking
+
 document.getElementById('show-more').addEventListener('click', function(e){
     e.target.style.display = 'none';
 })
+
+
+// 14. cards : sort by date
 
 const sortBy =() =>{
   const final = sortData.sort(function(a,b){

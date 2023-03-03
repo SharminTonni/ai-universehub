@@ -1,9 +1,12 @@
+const sortData = [];
+
 const loadData = () =>{
   document.getElementById('spinner').classList.remove('d-none');
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     fetch(url)
     .then(res => res.json())
     .then(data => {
+      
       document.getElementById('spinner').classList.add('d-none');
      
       displayData(data.data.tools.slice(0, 6))
@@ -28,10 +31,10 @@ sortBtn.addEventListener('click', () =>{
   .then(data => {
     document.getElementById('spinner').classList.add('d-none');
     
-    tools.array.sort(function(a, b) {
+    let sorted =  tools.sort(function(a, b) {
       new Date(a.published_in) - new Date(b.published_in)
     })
-    displayData(data.data.tools)
+    displayData(data.data.tools, sorted)
 
   })
 })
@@ -44,7 +47,7 @@ const displayData = (tools) =>{
     cardContainer.innerHTML = "";
 
     tools.forEach(tool =>{
-        // console.log(tool.id)
+        // console.log(tool)
      
 
         const colDiv = document.createElement('div');
@@ -59,12 +62,12 @@ const displayData = (tools) =>{
         <div class="card-body">
           <h4 class="card-title">Features</h4>
          <div class ="list-container">
-          <ol>
+          <ol id="features">
 
-            <li>${tool.features[0]}</li>
-            <li>${tool.features[1]}</li>
-            <li>${tool.features[2] ? tool.features[2] : "No More Features"}</li>
-            <li>${tool.features[3] ? tool.features[3] : "No More Features"}</li>
+            <li class="${tool.features[0] === undefined ? 'd-none' : ''}">${tool.features[0]}</li>
+            <li class="${tool.features[1] === undefined ? 'd-none' : ''}">${tool.features[1]}</li>
+            <li class="${tool.features[2] === undefined ? 'd-none' : ''}">${tool.features[2]}</li>
+            <li class="${tool.features[3] === undefined ? 'd-none' : ''}">${tool.features[3]}</li>
           
           </ol>
          </div>
@@ -87,6 +90,9 @@ const displayData = (tools) =>{
         `;
     
         cardContainer.appendChild(colDiv);
+
+
+
     })
 }
 
@@ -95,11 +101,14 @@ const loadDetails = (id) =>{
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
   fetch(url)
   .then(res=> res.json())
-  .then(details => displayDetails(details.data))
+  .then(details => {
+   
+    displayDetails(details.data)
+  })
 }
 
 const displayDetails = (details)=>{
-    console.log(details)
+    // console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;

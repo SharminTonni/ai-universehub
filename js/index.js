@@ -5,6 +5,7 @@ const loadData = () =>{
     .then(res => res.json())
     .then(data => {
       document.getElementById('spinner').classList.add('d-none');
+     
       displayData(data.data.tools.slice(0, 6))
     })
 }
@@ -19,7 +20,7 @@ const showMore = () =>{
 }
 
 const displayData = (tools) =>{
-    // console.log(tool)
+    console.log(tools)
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
@@ -80,7 +81,7 @@ const loadDetails = (id) =>{
 }
 
 const displayDetails = (details)=>{
-    console.log(details)
+    // console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
@@ -132,6 +133,7 @@ const displayDetails = (details)=>{
 document.getElementById('show-more').addEventListener('click', function(e){
     e.target.style.display = 'none';
 })
+
 
 
 

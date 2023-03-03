@@ -17,13 +17,24 @@
         input{
             border: none;
         }
+
+        #close-btn{
+            margin-left: 762px;
+            margin-top: -30px
+        }
+
+        @media only screen and (max-width: 768px){
+            #close-btn{
+               margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body class="container">
     
     <header class="text-center my-5">
         <h1 class="mb-4">AI Universe Hub</h1>
-        <button class="btn btn-danger px-5 py-3 fs-5 fw-bold">Sort By Date</button>
+        <button onclick="sortBy()" class="btn btn-danger px-5 py-3 fs-5 fw-bold">Sort By Date</button>
     </header>
 
     <!----------------------------- main section starts here ------------------ -->
@@ -64,9 +75,9 @@
         <div class="modal-content">
           <div class="modal-header">
             
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button id="close-btn" type="button" class="btn btn-danger rounded-circle" data-bs-dismiss="modal">&#x2715</button>
           </div>
-          <div class="modal-body d-flex gap-3 p-3">
+          <div class="modal-body d-flex flex-sm-column gap-3 p-3">
           <div class="border border-danger rounded-3 p-5">
             <div>
                 <h5 class="modal-title" id="detailsModalLabel">Modal title</h5>
@@ -76,7 +87,7 @@
                 <h5 class="text-danger" id="plan2"></h5>
                 <h5 class="text-warning" id="plan3"></h5>
     
-                <div class="d-flex justify-content-around">
+                <div class="d-flex flex-sm-column justify-content-around">
                     <div>
                         <h3>Features</h3>
                         <ul id="features">

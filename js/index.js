@@ -93,9 +93,11 @@ const displayDetails = (details)=>{
    document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
    document.getElementById('list-3').innerText = details.features[3].feature_name ? details.features[3].feature_name : 'No Data Found';
 
-   document.getElementById('second-list-1').innerText = details.integrations ? details.integrations[0] : 'No Data Found';
-   document.getElementById('second-list-2').innerText = details.integrations ? details.integrations[1] : 'No Data Found';
-   document.getElementById('second-list-3').innerText = details.integrations ? details.integrations[2] : 'No Data Found';
+   
+
+   document.getElementById('second-list-1').innerText = details.integrations[0] ? details.integrations[0] : 'No Data Found';
+   document.getElementById('second-list-2').innerText = details.integrations[1] ? details.integrations[1] : 'No Data Found';
+   document.getElementById('second-list-3').innerText = details.integrations[2] ? details.integrations[2] : 'No Data Found';
 
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";
@@ -103,6 +105,15 @@ const displayDetails = (details)=>{
    const image = document.createElement('img');
    image.src = details.image_link[0];
    image.classList.add('img-fluid', 'mb-5');
+   const span = document.createElement('span');
+   span.classList.add('badge', 'position-absolute','top-0', 'end-0','bg-danger', 'px-3', 'py-2');
+   if(details.accuracy === null){
+    span.classList.add('d-none')
+   }
+
+   {
+    span.innerHTML = (details.accuracy.score * 100) + '%' + 'Accuracy'  
+   }
 
    const h3 = document.createElement('h3');
    h3.innerHTML = details.input_output_examples[0].input;
@@ -110,13 +121,8 @@ const displayDetails = (details)=>{
    const p = document.createElement('p');
    p.innerHTML = details.input_output_examples[0].output;
 
-   secondPart.innerHTML = `
-   <span class="position-absolute top-0 end-0 translate-middle badge bg-danger px-3 py-2">
-    ${details.accuracy.score * 100}
-    
-  </span>
-   `
-
+  
+   secondPart.appendChild(span)
    secondPart.appendChild(image);
    secondPart.appendChild(h3);
    secondPart.appendChild(p);

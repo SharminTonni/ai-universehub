@@ -19,8 +19,26 @@ const showMore = () =>{
 
 }
 
+const sortBtn = document.getElementById('sort-btn');
+sortBtn.addEventListener('click', () =>{
+  document.getElementById('spinner').classList.remove('d-none');
+  const url = `https://openapi.programming-hero.com/api/ai/tools`
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('spinner').classList.add('d-none');
+    
+    tools.array.sort(function(a, b) {
+      new Date(a.published_in) - new Date(b.published_in)
+    })
+    displayData(data.data.tools)
+
+  })
+})
+
 const displayData = (tools) =>{
-    console.log(tools)
+  
+    // console.log(tools)
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
@@ -81,24 +99,27 @@ const loadDetails = (id) =>{
 }
 
 const displayDetails = (details)=>{
-    // console.log(details)
+    console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
 
-   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us for pricing'  ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
+   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us for pricing' ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
    document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us for pricing' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
-   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us for pricing' ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
+   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us for pricing'  ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
 
    document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
    document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
    document.getElementById('list-3').innerText = details.features[3].feature_name ? details.features[3].feature_name : 'No Data Found';
 
    
+  const secondList = document.getElementById("integration");
 
-   document.getElementById('second-list-1').innerText = details.integrations[0] ? details.integrations[0] : 'No Data Found';
-   document.getElementById('second-list-2').innerText = details.integrations[1] ? details.integrations[1] : 'No Data Found';
-   document.getElementById('second-list-3').innerText = details.integrations[2] ? details.integrations[2] : 'No Data Found';
+  details.integrations.forEach((integration) => {
+    const li = document.createElement("li");
+    li.innerHTML = integration
+    secondList.appendChild(li);
+  })
 
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";
@@ -108,7 +129,7 @@ const displayDetails = (details)=>{
    image.classList.add('img-fluid', 'mb-5');
    const span = document.createElement('span');
    span.classList.add('badge', 'position-absolute','top-0', 'end-0','bg-danger', 'px-3', 'py-2');
-   if(details.accuracy === null){
+   if(details.accuracy.score === null){
     span.classList.add('d-none')
    }
 

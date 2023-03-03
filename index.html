@@ -34,7 +34,7 @@
     
     <header class="text-center my-5">
         <h1 class="mb-4">AI Universe Hub</h1>
-        <button onclick="sortBy()" class="btn btn-danger px-5 py-3 fs-5 fw-bold">Sort By Date</button>
+        <button id="sort-btn" class="btn btn-danger px-5 py-3 fs-5 fw-bold">Sort By Date</button>
     </header>
 
     <!----------------------------- main section starts here ------------------ -->
@@ -77,20 +77,22 @@
             
             <button id="close-btn" type="button" class="btn btn-danger rounded-circle" data-bs-dismiss="modal">&#x2715</button>
           </div>
-          <div class="modal-body d-flex flex-sm-column gap-3 p-3">
+          <div class="modal-body d-lg-flex gap-3 p-3">
           <div class="border border-danger rounded-3 p-5">
             <div>
                 <h5 class="modal-title" id="detailsModalLabel">Modal title</h5>
             </div>
     
+                <div class="d-lg-flex g-3">
                 <h5 class="text-success" id="plan1"></h5>
                 <h5 class="text-danger" id="plan2"></h5>
                 <h5 class="text-warning" id="plan3"></h5>
+                </div>
     
-                <div class="d-flex flex-sm-column justify-content-around">
+                <div class="d-flex justify-content-around">
                     <div>
                         <h3>Features</h3>
-                        <ul id="features">
+                        <ul>
                             <li id="list-1"></li>
                             <li id="list-2"></li>
                             <li id="list-3"></li>
@@ -100,9 +102,7 @@
                     <div>
                         <h3>Integration</h3>
                         <ul id="integration">
-                            <li id="second-list-1"></li>
-                            <li id="second-list-2"></li>
-                            <li id="second-list-3"></li>
+                            
                         </ul>
                     </div>
                 </div>

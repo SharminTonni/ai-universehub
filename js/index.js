@@ -1,4 +1,6 @@
-const sortData = [];
+
+
+let sortData = [];
 
 const loadData = () =>{
   document.getElementById('spinner').classList.remove('d-none');
@@ -8,10 +10,12 @@ const loadData = () =>{
     .then(data => {
       
       document.getElementById('spinner').classList.add('d-none');
-     
+      sortData = data.data.tools;
       displayData(data.data.tools.slice(0, 6))
     })
 }
+
+
 
 const showMore = () =>{
 
@@ -22,26 +26,11 @@ const showMore = () =>{
 
 }
 
-const sortBtn = document.getElementById('sort-btn');
-sortBtn.addEventListener('click', () =>{
-  document.getElementById('spinner').classList.remove('d-none');
-  const url = `https://openapi.programming-hero.com/api/ai/tools`
-  fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('spinner').classList.add('d-none');
-    
-    let sorted =  tools.sort(function(a, b) {
-      new Date(a.published_in) - new Date(b.published_in)
-    })
-    displayData(data.data.tools, sorted)
 
-  })
-})
 
 const displayData = (tools) =>{
   
-    // console.log(tools)
+    console.log(tools)
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
@@ -108,14 +97,14 @@ const loadDetails = (id) =>{
 }
 
 const displayDetails = (details)=>{
-    // console.log(details)
+    console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
 
-   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us for pricing' ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
-   document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us for pricing' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
-   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us for pricing'  ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
+   document.getElementById('plan1').innerText = details.pricing[0].price!== 'Contact us ' ? details.pricing[0].price + " " + details.pricing[0].plan : "Free of cost";
+   document.getElementById('plan2').innerText = details.pricing[1].price!== 'Contact us ' ? details.pricing[1].price + " " + details.pricing[1].plan : "Free Of Cost";
+   document.getElementById('plan3').innerText =details.pricing[2].price!== 'Contact us '  ? details.pricing[2].price + " " + details.pricing[2].plan : "Free Of Cost";
 
    document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
    document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
@@ -123,6 +112,7 @@ const displayDetails = (details)=>{
 
    
   const secondList = document.getElementById("integration");
+  secondList.innerHTML = "";
 
   details.integrations.forEach((integration) => {
     const li = document.createElement("li");
@@ -164,8 +154,13 @@ document.getElementById('show-more').addEventListener('click', function(e){
     e.target.style.display = 'none';
 })
 
+const sortBy =() =>{
+  const final = sortData.sort(function(a,b){
+    return new Date(a.published_in) - new Date(b.published_in);
+  })
 
-
+  displayData(sortData, final)
+}
 
 loadDetails()
 loadData();

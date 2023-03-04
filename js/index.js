@@ -138,7 +138,7 @@ const displayDetails = (details)=>{
       // 9. feature_name here 
 
       const featureNames = Object.values(details.features)
-      console.log(featureNames)
+      // console.log(featureNames)
       const featureContainer = document.getElementById('feature-name')
       featureContainer.innerHTML = "";
       

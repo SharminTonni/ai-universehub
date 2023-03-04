@@ -105,7 +105,7 @@ const loadDetails = (id) =>{
 // 7. showing detail data on a modal on an onclick arrow button
 
 const displayDetails = (details)=>{
-    // console.log(details)
+    console.log(details)
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
@@ -178,7 +178,7 @@ const displayDetails = (details)=>{
    image.src = details.image_link[0];
    image.classList.add('img-fluid', 'mb-5');
    const span = document.createElement('span');
-   span.classList.add('badge', 'position-absolute','top-0', 'end-0','bg-danger', 'px-3', 'py-2');
+   span.classList.add('badge', 'position-absolute', 'top-0', 'end-0', 'bg-danger', 'px-3', 'py-2');
    if(details.accuracy.score === null){
     span.classList.add('d-none')
    }
@@ -187,18 +187,39 @@ const displayDetails = (details)=>{
     span.innerHTML = (details.accuracy.score * 100) + '%' + 'Accuracy'  
    }
 
-  //  12.input output examples
-   const h3 = document.createElement('h3');
-   h3.innerHTML = details.input_output_examples[0] ? details.input_output_examples[0].input : details.input_output_examples[1].input;
-
-   const p = document.createElement('p');
-   p.innerHTML = details.input_output_examples[0] ? details.input_output_examples[0].output : details.input_output_examples[1].output;
-
-  
    secondPart.appendChild(span)
    secondPart.appendChild(image);
-   secondPart.appendChild(h3);
-   secondPart.appendChild(p);
+  //  12.input output examples
+
+   if(details.input_output_examples !== null){
+
+     details.input_output_examples.forEach(example => {
+       console.log(example)
+       const h3 = document.createElement('h3');
+       h3.innerHTML = example.input;
+       const p = document.createElement('p');
+       p.innerHTML = example.output;
+       secondPart.appendChild(h3);
+       secondPart.appendChild(p);
+   
+     })
+   }
+
+   else{
+    const h3 = document.createElement('h3');
+    h3.innerHTML = "Can You Give Any Example?"
+    const p = document.createElement('p');
+    p.innerHTML = "No!! Not Yet!! Take a Break!!";
+
+    secondPart.appendChild(h3);
+    secondPart.appendChild(p);
+   }
+
+
+
+  
+   
+   
 
 }
 

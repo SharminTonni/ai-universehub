@@ -33,13 +33,13 @@ const showMore = () =>{
 
 const displayData = (tools) =>{
   
-    // console.log(tools)
+   
     const cardContainer = document.getElementById('card-container');
 
     cardContainer.innerHTML = "";
 
     tools.forEach(tool =>{
-        // console.log(tool)
+      
      
 
         // 5.creating cards to show data on web browser
@@ -105,7 +105,7 @@ const loadDetails = (id) =>{
 // 7. showing detail data on a modal on an onclick arrow button
 
 const displayDetails = (details)=>{
-    console.log(details)
+   
 
    const modalTitle = document.getElementById('detailsModalLabel')
    modalTitle.innerText = details.description;
@@ -135,10 +135,10 @@ const displayDetails = (details)=>{
       }
     
 
-      // 9. feature_name here 
+      // 9.1 feature_name here 
 
       const featureNames = Object.values(details.features)
-      // console.log(featureNames)
+     
       const featureContainer = document.getElementById('feature-name')
       featureContainer.innerHTML = "";
       
@@ -151,7 +151,7 @@ const displayDetails = (details)=>{
       
 
       
-   
+  // 9.2 integration part is here
   const secondList = document.getElementById("integration");
   secondList.innerHTML = "";
 
@@ -169,7 +169,7 @@ const displayDetails = (details)=>{
   }
 
 
-  // 10.integration part is here
+  // 10.second modal card is here
 
    const secondPart = document.getElementById('second-card');
    secondPart.innerHTML = "";
@@ -189,21 +189,18 @@ const displayDetails = (details)=>{
 
    secondPart.appendChild(span)
    secondPart.appendChild(image);
+
+
   //  12.input output examples
 
    if(details.input_output_examples !== null){
 
-   console.log(details.input_output_examples[0])
-     
-     
        const h3 = document.createElement('h3');
        h3.innerHTML =details.input_output_examples[0].input;
        const p = document.createElement('p');
        p.innerHTML = details.input_output_examples[0].output;
        secondPart.appendChild(h3);
        secondPart.appendChild(p);
-   
-     
    }
 
    else{
@@ -215,12 +212,6 @@ const displayDetails = (details)=>{
     secondPart.appendChild(h3);
     secondPart.appendChild(p);
    }
-
-
-
-  
-   
-   
 
 }
 

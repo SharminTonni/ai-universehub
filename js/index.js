@@ -13,7 +13,7 @@ const loadData = () =>{
     .then(data => {
       
       document.getElementById('spinner').classList.add('d-none');
-      sortData = data.data.tools;
+      sortData = data.data.tools.slice(0, 6);
       displayData(data.data.tools.slice(0, 6))
     })
 }
@@ -25,7 +25,10 @@ const showMore = () =>{
   const url = `https://openapi.programming-hero.com/api/ai/tools`
   fetch(url)
   .then(res => res.json())
-  .then(data => displayData(data.data.tools))
+  .then(data => {
+    sortData = data.data.tools;
+    displayData(data.data.tools)
+  })
 
 }
 
@@ -225,11 +228,13 @@ document.getElementById('show-more').addEventListener('click', function(e){
 // 14. cards : sort by date
 
 const sortBy =() =>{
+
   const final = sortData.sort(function(a,b){
     return new Date(a.published_in) - new Date(b.published_in);
   })
 
   displayData(sortData, final)
+
 }
 
 loadDetails()

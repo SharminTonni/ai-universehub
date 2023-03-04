@@ -143,7 +143,7 @@ const displayDetails = (details)=>{
       featureContainer.innerHTML = "";
       
       for(let name of featureNames){
-        console.log(name.feature_name)
+        
         const li = document.createElement('li')
         li.innerHTML = name.feature_name;
         featureContainer.appendChild(li)
@@ -193,16 +193,17 @@ const displayDetails = (details)=>{
 
    if(details.input_output_examples !== null){
 
-     details.input_output_examples.forEach(example => {
-       console.log(example)
+   console.log(details.input_output_examples[0])
+     
+     
        const h3 = document.createElement('h3');
-       h3.innerHTML = example.input;
+       h3.innerHTML =details.input_output_examples[0].input;
        const p = document.createElement('p');
-       p.innerHTML = example.output;
+       p.innerHTML = details.input_output_examples[0].output;
        secondPart.appendChild(h3);
        secondPart.appendChild(p);
    
-     })
+     
    }
 
    else{

@@ -137,10 +137,20 @@ const displayDetails = (details)=>{
 
       // 9. feature_name here 
 
-   document.getElementById('list-1').innerText = details.features[1].feature_name ? details.features[1].feature_name : 'No Data Found';
-   document.getElementById('list-2').innerText = details.features[2].feature_name ? details.features[2].feature_name : 'No Data Found';
-   document.getElementById('list-3').innerText = details.features[3].feature_name ? details.features[3].feature_name : 'No Data Found';
+      const featureNames = Object.values(details.features)
+      console.log(featureNames)
+      const featureContainer = document.getElementById('feature-name')
+      featureContainer.innerHTML = "";
+      
+      for(let name of featureNames){
+        console.log(name.feature_name)
+        const li = document.createElement('li')
+        li.innerHTML = name.feature_name;
+        featureContainer.appendChild(li)
+      }
+      
 
+      
    
   const secondList = document.getElementById("integration");
   secondList.innerHTML = "";
